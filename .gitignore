@@ -22,3 +22,6 @@
 ## Mac OS X metadata files:
 *.DS_Store
 
+### Sublime Text Files ###
+*.sublime_project
+*.sublime_workspace
