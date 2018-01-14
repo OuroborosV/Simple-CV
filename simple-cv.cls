@@ -2,9 +2,13 @@
 % Awesome CV Class File
 %
 % This class has been downloaded from:
-% https://github.com/posquit0/Awesome-CV
+% https://github.com/essellwto/Simple-CV
 %
 % Author:
+% Calvin McPhail-Snyder  
+% http://www.esselltwo.com
+%
+% Based on the Awesome-CV class by:
 % Claud D. Park <posquit0.bj@gmail.com>
 % http://www.posquit0.com
 %
@@ -21,7 +25,7 @@
 %-------------------------------------------------------------------------------
 %                Identification
 %-------------------------------------------------------------------------------
-\ProvidesClass{awesome-cv}[2017/02/05 v1.6.1 Awesome Curriculum Vitae Class]
+\ProvidesClass{simple-cv}[2018/01/14 v0.1]
 \NeedsTeXFormat{LaTeX2e}
 
 
