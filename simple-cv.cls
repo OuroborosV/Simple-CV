@@ -212,10 +212,13 @@
 
 
 % For elements of honor
-\newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{headertext} #1}}
-\newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{text} #1}}
+\newcommand*{\honordescriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{headertext} #1}}
+\newcommand*{\honornamestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{text} #1}}
 \newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
 \newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+
+% For publications (based on honors)
+\newcommand*{\pubnamestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} ``#1''}}
 
 % For elements of skill
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{headertext} #1}}
@@ -597,8 +600,9 @@
  {\descriptionstyle{#5}}
 }
 
-% Define an environment for cvhonor
-\newenvironment{cvhonors}{%
+% Define an environment for short (one-line) cv entries
+% Use for honors, publications, etc.
+\newenvironment{cvshortentries}{%
   \vspace{\acvSectionContentTopSkip}
   \vspace{-2mm}
   \begin{center}
@@ -612,8 +616,9 @@
 % Define a line of cv information(honor, award or something else)
 % Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
 \newcommand*{\cvhonor}[4]{%
-  \honordatestyle{#4} & \honorpositionstyle{#1}, \honortitlestyle{#2} & \honorlocationstyle{#3} \\
+  \honordatestyle{#4} & \honornamestyle{#1}, \honordescriptionstyle{#2} & \honorlocationstyle{#3} \\
 }
+
 
 % Define an environment for cvskill
 \newenvironment{cvskills}{%
