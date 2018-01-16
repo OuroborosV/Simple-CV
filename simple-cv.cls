@@ -200,24 +200,27 @@
 \newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
 
 % For elements of entry
-\newcommand*{\entrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{headertext} #1}}
-\newcommand*{\entrypositionstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\scshape\color{text} #1}}
+\newcommand*{\entryheaderstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{headertext} #1}}
+\newcommand*{\entrysubheaderstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\scshape\color{text} #1}}
 \newcommand*{\entrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\slshape\color{text} #1}}
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 \newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
 
-% For elements of subentry
-\newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{headertext} #1}}
-\newcommand*{\subentrypositionstyle}[1]{{\fontsize{7pt}{1em}\bodyfont\scshape\color{text} #1}}
-\newcommand*{\subentrydatestyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{text} #1}}
-\newcommand*{\subentrylocationstyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
-\newcommand*{\subdescriptionstyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+% Other styles based on entry:
+% Talks
+\newcommand*{\talktitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\color{text} ``#1''}}
+
 
 % For elements of honor
-\newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{headertext} #1}}
-\newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{text} #1}}
+\newcommand*{\honordescriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{headertext} #1}}
+\newcommand*{\honornamestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{text} #1}}
 \newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
 \newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+
+% For publications
+\newcommand*{\publicationauthorstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
+\newcommand*{\publicationtitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\slshape\color{text} #1}}
+\newcommand*{\publicationdescriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
 
 % For elements of skill
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{headertext} #1}}
@@ -563,45 +566,43 @@
   \end{center}
 }
 % Define an entry of cv information
-% Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
-\newcommand*{\cventry}[5]{%
+% Usage: \cventry{<header>}{<subheader>}{<location>}{<date>}{<description>}
+% This command has all of the spacing.
+% To allow for "subclassing" we split the formatting off into different commands
+\newcommand*{\cventrytemplate}[5]{%
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
     \ifempty{#2#3}
-      {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-      {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-      \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+      {#1 & #4 \\}
+      {#1 & #3 \\
+      #2 & #4 \\}
     \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
   \end{tabular*}%
 }
 
-% Define an environment for cvsubentry
-\newenvironment{cvsubentries}{%
-  \begin{center}
-}{%
-  \end{center}
-}
-% Define a subentry of cv information
-% Usage: \cvsubentry{<position>}{<title>}{<date>}{<description>}
-\newcommand*{\cvsubentry}[4]{%
-  \setlength\tabcolsep{0pt}
-  \setlength{\extrarowheight}{0pt}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \setlength\leftskip{0.2cm}
-    \subentrytitlestyle{#2} & \ifthenelse{\equal{#1}{}}
-      {\subentrydatestyle{#3}}{}
-    \ifthenelse{\equal{#1}{}}
-      {}
-      {\subentrypositionstyle{#1} & \subentrydatestyle{#3} \\}
-    \ifthenelse{\equal{#4}{}}
-      {}
-      {\multicolumn{2}{L{17.0cm}}{\subdescriptionstyle{#4}} \\}
-  \end{tabular*}
+% Generic CV entry
+\newcommand*{\cventry}[5]{%
+ \cventrytemplate
+ {\entryheaderstyle{#1}}
+ {\entrysubheaderstyle{#2}}
+ {\entrylocationstyle{#3}}
+ {\entrydatestyle{#4}}
+ {\descriptionstyle{#5}}
 }
 
-% Define an environment for cvhonor
+%CV entry for a talk/presentation
+\newcommand*{\cvtalk}[5]{%
+ \cventrytemplate
+ {\entryheaderstyle{#1}}
+ {\talktitlestyle{#2}}
+ {\entrylocationstyle{#3}}
+ {\entrydatestyle{#4}}
+ {\descriptionstyle{#5}}
+}
+
+% Define an environment for honors
 \newenvironment{cvhonors}{%
   \vspace{\acvSectionContentTopSkip}
   \vspace{-2mm}
@@ -616,8 +617,24 @@
 % Define a line of cv information(honor, award or something else)
 % Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
 \newcommand*{\cvhonor}[4]{%
-  \honordatestyle{#4} & \honorpositionstyle{#1}, \honortitlestyle{#2} & \honorlocationstyle{#3} \\
+  \honordatestyle{#4} & \honornamestyle{#1}, \honordescriptionstyle{#2} & \honorlocationstyle{#3} \\
 }
+
+% Define an environment for publications
+\newenvironment{cvpublications}{%
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2mm}
+  \setlength{\leftskip}{0.5in}
+  \setlength{\parindent}{-0.5in}
+}{%
+}
+
+% Define a single publication
+% Usage: \cvhonor{<title>}{<authors>}{<bibliographic info>}
+\newcommand*{\cvpublication}[3]{%
+  \publicationauthorstyle{#2}. \publicationtitlestyle{#1}. \publicationdescriptionstyle{#3} \par
+}
+
 
 % Define an environment for cvskill
 \newenvironment{cvskills}{%
