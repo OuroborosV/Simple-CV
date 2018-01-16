@@ -217,8 +217,10 @@
 \newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
 \newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 
-% For publications (based on honors)
-\newcommand*{\pubnamestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} ``#1''}}
+% For publications
+\newcommand*{\publicationauthorstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
+\newcommand*{\publicationtitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\slshape\color{text} #1}}
+\newcommand*{\publicationdescriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
 
 % For elements of skill
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{headertext} #1}}
@@ -600,9 +602,8 @@
  {\descriptionstyle{#5}}
 }
 
-% Define an environment for short (one-line) cv entries
-% Use for honors, publications, etc.
-\newenvironment{cvshortentries}{%
+% Define an environment for honors
+\newenvironment{cvhonors}{%
   \vspace{\acvSectionContentTopSkip}
   \vspace{-2mm}
   \begin{center}
@@ -617,6 +618,21 @@
 % Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
 \newcommand*{\cvhonor}[4]{%
   \honordatestyle{#4} & \honornamestyle{#1}, \honordescriptionstyle{#2} & \honorlocationstyle{#3} \\
+}
+
+% Define an environment for publications
+\newenvironment{cvpublications}{%
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2mm}
+  \setlength{\leftskip}{0.5in}
+  \setlength{\parindent}{-0.5in}
+}{%
+}
+
+% Define a single publication
+% Usage: \cvhonor{<title>}{<authors>}{<bibliographic info>}
+\newcommand*{\cvpublication}[3]{%
+  \publicationauthorstyle{#2}. \publicationtitlestyle{#1}. \publicationdescriptionstyle{#3} \par
 }
 
 
