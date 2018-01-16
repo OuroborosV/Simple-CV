@@ -206,6 +206,11 @@
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 \newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
 
+% Other styles based on entry:
+% Talks
+\newcommand*{\talktitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\color{text} ``#1''}}
+
+
 % For elements of honor
 \newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{headertext} #1}}
 \newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{text} #1}}
@@ -557,19 +562,40 @@
 }
 % Define an entry of cv information
 % Usage: \cventry{<header>}{<subheader>}{<location>}{<date>}{<description>}
-\newcommand*{\cventry}[5]{%
+% This command has all of the spacing.
+% To allow for "subclassing" we split the formatting off into different commands
+\newcommand*{\cventrytemplate}[5]{%
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
     \ifempty{#2#3}
-      {\entryheaderstyle{#1} & \entrydatestyle{#4} \\}
-      {\entryheaderstyle{#1} & \entrylocationstyle{#3} \\
-      \entrysubheaderstyle{#2} & \entrydatestyle{#4} \\}
+      {#1 & #4 \\}
+      {#1 & #3 \\
+      #2 & #4 \\}
     \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
   \end{tabular*}%
 }
 
+% Generic CV entry
+\newcommand*{\cventry}[5]{%
+ \cventrytemplate
+ {\entryheaderstyle{#1}}
+ {\entrysubheaderstyle{#2}}
+ {\entrylocationstyle{#3}}
+ {\entrydatestyle{#4}}
+ {\descriptionstyle{#5}}
+}
+
+%CV entry for a talk/presentation
+\newcommand*{\cvtalk}[5]{%
+ \cventrytemplate
+ {\entryheaderstyle{#1}}
+ {\talktitlestyle{#2}}
+ {\entrylocationstyle{#3}}
+ {\entrydatestyle{#4}}
+ {\descriptionstyle{#5}}
+}
 
 % Define an environment for cvhonor
 \newenvironment{cvhonors}{%
