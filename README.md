@@ -8,7 +8,7 @@
 
 ## <a name="what-is-awesomecv"></a>What is Simple CV?
 
-**Simple CV** is a LaTeX template for a **CV(Curriculum Vitae)**, **Résumé** or **Cover Letter** based on [Awesome CV](https://github.com/posquit0/Awesome-CV). The class files are written so that it should be easy to modify the template as you see fit. Examples are contained in examples.pdf.
+**Simple CV** is a LaTeX template for a **CV(Curriculum Vitae)**, **Résumé** or **Cover Letter** based on [Awesome CV](https://github.com/posquit0/Awesome-CV). The class files are written so that it should be easy to modify the template as you see fit. Example source files and the resulting PDFs are located in `examples`.
 
 
 ## <a name="how-to-use">How to Use
